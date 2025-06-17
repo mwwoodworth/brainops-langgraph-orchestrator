@@ -1,4 +1,4 @@
-name: Codex Generate & PyTest
+name: Codegen & PyTest
 
 on:
   push:
@@ -8,38 +8,23 @@ on:
 
 env:
   PYTHON_VERSION: "3.11"
-  CODEX_API_KEY: ${{ secrets.CODEX_API_KEY }}
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
 jobs:
-  codex:
+  codegen:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Install codex-cli from GitHub (latest source)
+      - name: Run codegen (test)
         run: |
-          pip uninstall -y codex-cli || true
-          pip install git+https://github.com/akhil-cp/codex-cli.git
-
-      - name: Ensure pip user bin on PATH
-        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      - name: Check CLI presence
-        run: which codex-cli && codex-cli --help
-
-      - name: Run Codex (CLI)
-        run: codex-cli generate --ci
-
+          mkdir -p generated
+          python scripts/codegen.py --prompt "Write a Python function to compute Fibonacci numbers recursively." --out generated/fib.py
       - name: Run tests
         run: pytest -q

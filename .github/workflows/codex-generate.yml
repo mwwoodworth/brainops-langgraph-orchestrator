@@ -20,27 +20,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Verify Python Version
-        run: python --version
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install --no-cache-dir --upgrade --force-reinstall codex_cli==1.0.1
+          pip install --no-cache-dir --upgrade --force-reinstall codex-cli==1.0.1
+          python -m pip show codex_cli
 
-      - name: Debug Installation
-        run: python -m pip show codex_cli
+      - name: Add pip user bin to PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Verify codex_cli import
-        run: python -c "import codex_cli.cli"
+      - name: Debug codex-cli install
+        run: which codex-cli && codex-cli --help
 
-      - name: Run Codex
-        run: python -m codex_cli.cli generate --ci
+      - name: Run Codex (CLI)
+        run: codex-cli generate --ci
 
       - name: Run tests
         run: pytest -q

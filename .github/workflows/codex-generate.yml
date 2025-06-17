@@ -24,23 +24,23 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Verify Python Version
+        run: python --version
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          # force-reinstall correct version and avoid cache (CRITICAL!)
           pip install --no-cache-dir --upgrade --force-reinstall codex-cli==1.0.1
-          python -m pip show codex-cli
 
+      - name: Debug Installation
+        run: python -m pip show codex-cli
 
-      # (Optional) quick sanity‑check
       - name: Verify codex-cli import
         run: python -c "import codex_cli.cli"
-      
-      
+
       - name: Run Codex
         run: python -m codex_cli.cli generate --ci
-
 
       - name: Run tests
         run: pytest -q

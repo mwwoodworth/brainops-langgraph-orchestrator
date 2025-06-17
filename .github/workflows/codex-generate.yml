@@ -31,6 +31,14 @@ jobs:
           pip install openai langgraph codex-cli
           pip list  # Verify installed packages
 
+      - name: Debug Python Environment
+        run: |
+          which python
+          python -m site
+
+      - name: Verify Dependencies
+        run: python -c "import codex_cli"
+
       - name: Run Codex
         run: python -m codex_cli generate --ci
 

@@ -1,14 +1,5 @@
 fastapi
 uvicorn
-codex-cli==1.0.1
 openai
 langgraph
 pytest
-# (Add any other direct dependencies you use in your project, such as pydantic, requests, etc.)
-
-# Optionally, if you want your test runner to pick up all code:
-pytest-cov
-
-# If you use Google generative AI features directly, you can list them explicitly,
-# but codex-cli already pulls its own dependencies.
-# google-generativeai

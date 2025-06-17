@@ -37,10 +37,10 @@ jobs:
         run: python -m pip show codex-cli
 
       - name: Verify codex-cli import
-        run: python -c "import codex_cli.cli"
+        run: python -c "import codex-cli.cli"
 
       - name: Run Codex
-        run: python -m codex_cli.cli generate --ci
+        run: python -m codex-cli.cli generate --ci
 
       - name: Run tests
         run: pytest -q

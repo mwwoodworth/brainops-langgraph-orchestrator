@@ -37,10 +37,10 @@ jobs:
           python -m site
 
       - name: Verify Dependencies
-        run: python -c "import codex_cli"
+        run: python -c "import codex-cli"
 
       - name: Run Codex
-        run: python -m codex_cli generate --ci
+        run: python -m codex-cli generate --ci
 
       - name: Run tests
         run: pytest -q

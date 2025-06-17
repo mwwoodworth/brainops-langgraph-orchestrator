@@ -29,6 +29,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install openai langgraph codex-cli
+          pip list  # Verify installed packages
 
       - name: Run Codex
         run: python -m codex_cli generate --ci

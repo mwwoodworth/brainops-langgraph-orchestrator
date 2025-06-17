@@ -1,3 +1,3 @@
 fastapi
 uvicorn
-codex-cli==0.2.1
+codex-cli==1.0.1

@@ -30,7 +30,7 @@ jobs:
           pip install openai langgraph codex-cli
 
       - name: Run Codex
-        run: python -m codex generate --ci
+run: codex-cli generate --ci
 
       - name: Run tests
         run: pytest -q

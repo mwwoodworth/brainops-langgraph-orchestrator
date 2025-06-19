@@ -22,7 +22,8 @@ which installs additional packages and generates code:
 ## Running
 
 Start the server using Python. It listens on the port defined by the
-`PORT` environment variable (defaults to `8000`).
+`PORT` environment variable (defaults to `8000`). `main.py` reads this
+variable at startup and passes it to Uvicorn.
 
 ```bash
 python main.py
@@ -35,6 +36,9 @@ python main.py
 | `PORT` | Port for the FastAPI server (default `8000`). |
 | `OPENAI_API_KEY` | Used by `scripts/codegen.py` for OpenAI requests. |
 | `CODEX_API_KEY` | Required by Codex CLI and CI workflows. |
+
+An example configuration is provided in `.env.example`. Copy it to `.env`
+and fill in your secrets before running the application.
 
 ## Helper Scripts
 
